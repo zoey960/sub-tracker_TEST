@@ -1,0 +1,596 @@
+/* 이 파일의 공통 색상과 기본 글꼴입니다.
+   색상을 변수로 관리하면 여러 컴포넌트의 색을 한 곳에서 일관되게 조정할 수 있습니다. */
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+  color: #202334;
+  background: #f5f6fa;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --muted: #85899b;
+  --border: #eceef4;
+  --purple: #6657e8;
+  --purple-light: #f0efff;
+}
+
+/* padding과 border를 요소의 지정 너비 안에 포함시켜 폭 계산을 단순하게 합니다. */
+* {
+  box-sizing: border-box;
+}
+
+/* 페이지 배경과 기본 여백을 설정합니다.
+   최소 너비를 둬 작은 화면에서도 내용이 지나치게 눌리지 않게 합니다. */
+body {
+  min-width: 320px;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 85% 0, rgba(225, 222, 255, 0.48), transparent 32rem),
+    #f5f6fa;
+}
+
+/* 폼 컨트롤도 페이지와 같은 글꼴을 사용하게 합니다. */
+button,
+input,
+select {
+  font: inherit;
+}
+
+/* 버튼 위에 마우스를 올렸을 때 클릭 가능한 요소임을 나타냅니다. */
+button {
+  cursor: pointer;
+}
+
+/* 전체 콘텐츠 폭은 최대 1100px이며 큰 화면에서는 가운데 정렬됩니다. */
+.app-shell {
+  width: min(1100px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 54px 0 28px;
+}
+
+/* 같은 정렬 규칙을 공유하는 가로 방향의 영역들입니다. */
+.page-header,
+.section-heading,
+.subscription-card,
+.card-actions,
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 페이지 최상단 제목 블록과 본문 사이에 공간을 둡니다. */
+.page-header {
+  margin-bottom: 30px;
+}
+
+/* 제목 위에 붙는 작은 영문 섹션 라벨입니다. */
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--purple);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+/* 브라우저 기본 제목/문단 위쪽 여백을 통일합니다. */
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+/* 페이지 제목은 화면 크기에 따라 글자 크기가 부드럽게 바뀝니다. */
+h1 {
+  margin-bottom: 7px;
+  font-size: clamp(27px, 4vw, 36px);
+  letter-spacing: -0.055em;
+}
+
+/* 카드/섹션 제목의 기본 크기와 자간입니다. */
+h2 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -0.04em;
+}
+
+/* 제목 아래의 설명 문구는 시각적 위계를 낮춰 표시합니다. */
+.page-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* 오른쪽 위 원화 표시를 정사각형 배지 안에 가운데 정렬합니다. */
+.header-mark {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border: 1px solid #e8e5ff;
+  border-radius: 17px;
+  background: #fff;
+  color: var(--purple);
+  font-size: 24px;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(62, 52, 150, 0.07);
+}
+
+/* 요약 카드 세 장을 같은 너비의 세 열로 배치합니다.
+   minmax(0, 1fr)은 내용이 길어도 열 너비가 화면 밖으로 밀리지 않게 합니다. */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+/* 요약 카드와 일반 패널에 공통 테두리, 둥근 모서리, 은은한 그림자를 적용합니다. */
+.summary-card,
+.panel {
+  border: 1px solid rgba(232, 234, 242, 0.9);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 8px 28px rgba(37, 42, 75, 0.035);
+}
+
+/* 상단 금액 요약 카드의 높이와 안쪽 여백입니다. */
+.summary-card {
+  min-height: 142px;
+  padding: 21px 23px;
+}
+
+/* 월 합계 카드만 부드러운 보라색 배경으로 강조합니다. */
+.summary-card-primary {
+  border-color: #e4e0ff;
+  background: linear-gradient(135deg, #f4f2ff, #fff 80%);
+}
+
+/* 카드 내 보조 텍스트 스타일입니다. */
+.summary-label,
+.summary-note {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* 지출 금액은 강조하며, 긴 금액도 카드 밖으로 넘치지 않게 줄바꿈을 허용합니다. */
+.summary-value {
+  margin: 13px 0 5px;
+  font-size: clamp(23px, 3vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  overflow-wrap: anywhere;
+}
+
+/* 핵심 월 합계 숫자를 브랜드 색으로 한 번 더 강조합니다. */
+.summary-card-primary .summary-value {
+  color: var(--purple);
+}
+
+/* 데스크톱 본문은 구독 목록과 우측 입력/분석 열로 나눕니다. */
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(290px, 0.9fr);
+  align-items: start;
+  gap: 20px;
+}
+
+/* 흰색 패널의 기본 내부 여백입니다. */
+.panel {
+  padding: 23px;
+}
+
+/* 목록 패널은 목록이 비어도 너무 납작해 보이지 않도록 최소 높이를 가집니다. */
+.subscription-panel {
+  min-height: 300px;
+}
+
+/* 각 섹션 제목과 그 아래 내용 사이의 간격을 설정합니다. */
+.section-heading {
+  margin-bottom: 20px;
+}
+
+/* 작은 패널에서는 제목 아래 여백을 조금 줄입니다. */
+.compact-heading {
+  margin-bottom: 18px;
+}
+
+/* 목록 오른쪽에 현재 항목 개수를 작은 알약 모양으로 표시합니다. */
+.item-count {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #f3f4f8;
+  color: #686d7e;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* 구독 카드들을 일정한 간격으로 세로 정렬합니다. */
+.subscription-list {
+  display: grid;
+  gap: 10px;
+}
+
+/* 개별 구독 카드의 정보/금액/버튼이 놓이는 한 줄입니다. */
+.subscription-card {
+  gap: 12px;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+}
+
+/* 카드 안 텍스트 영역이 주변 콘텐츠를 밀어내지 않게 합니다. */
+.subscription-info {
+  min-width: 0;
+}
+
+/* 구독 이름은 굵게 표시하고 긴 이름은 단어 중간에서도 줄바꿈합니다. */
+.subscription-name {
+  margin: 0 0 5px;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* 카테고리와 다음 결제일을 작은 보조 정보로 나란히 표시합니다. */
+.subscription-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 9px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* 월 환산 금액은 줄바꿈하지 않아 숫자를 빠르게 읽을 수 있게 합니다. */
+.subscription-price {
+  margin: 0;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* 금액 뒤의 "/ 월" 표시는 금액보다 작고 옅게 표시합니다. */
+.subscription-price small {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+/* 결제일까지 남은 일수를 보여 주는 기본 배지입니다. */
+.due-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 8px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  background: #f4f5f8;
+  color: #777c8c;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* 3일 이내 결제 배지는 주황색으로 미리 주의를 줍니다. */
+.due-badge.is-soon {
+  background: #fff2e8;
+  color: #c66b2d;
+}
+
+/* 오늘 결제 배지는 별도의 빨간색으로 구분합니다. */
+.due-badge.is-today {
+  background: #fff0f1;
+  color: #d94c61;
+}
+
+/* 수정/삭제 버튼은 콘텐츠 크기에 눌리지 않도록 고정 폭으로 유지합니다. */
+.card-actions {
+  flex-shrink: 0;
+  gap: 5px;
+}
+
+/* 텍스트형 수정/삭제 버튼의 기본 모양입니다. */
+.icon-button {
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #777c8c;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* 일반 버튼에 마우스를 올리면 배경과 글자색을 진하게 합니다. */
+.icon-button:hover {
+  background: #f3f4f8;
+  color: #34384b;
+}
+
+/* 삭제 버튼은 위험 작업임을 나타내는 붉은 hover 색상을 사용합니다. */
+.icon-button.delete-button:hover {
+  background: #fff0f1;
+  color: #d94c61;
+}
+
+/* 폼과 카테고리 패널을 세로 방향으로 쌓습니다. */
+.side-column {
+  display: grid;
+  gap: 18px;
+}
+
+/* 라벨과 입력 컨트롤을 세로로 쌓는 공통 폼 필드입니다. */
+.field {
+  display: grid;
+  min-width: 0;
+  gap: 7px;
+  margin-bottom: 14px;
+  color: #555a6d;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* 두 입력란을 같은 너비의 두 열로 나란히 배치합니다. */
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* 텍스트/숫자/날짜 입력란과 선택 상자의 공통 크기와 모양입니다. */
+.field input,
+.field select {
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  padding: 0 11px;
+  border: 1px solid #e8eaf0;
+  border-radius: 9px;
+  outline: none;
+  background: #fff;
+  color: #292d3e;
+  font-size: 12px;
+}
+
+/* 입력 전 예시 문구는 실제 입력값보다 옅게 표시합니다. */
+.field input::placeholder {
+  color: #b2b5c0;
+}
+
+/* 키보드나 포인터로 입력란을 선택했을 때 테두리와 바깥 링으로 초점을 보여 줍니다. */
+.field input:focus,
+.field select:focus {
+  border-color: #a9a1f6;
+  box-shadow: 0 0 0 3px rgba(102, 87, 232, 0.1);
+}
+
+/* 저장 및 수정 취소 버튼의 가로 정렬입니다. */
+.form-actions {
+  justify-content: flex-start;
+  gap: 9px;
+  margin-top: 3px;
+}
+
+/* 모든 폼 버튼의 기본 높이와 글자 모양입니다. */
+.button {
+  min-height: 40px;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* 주요 제출 버튼은 보라색 배경과 그림자로 강조합니다. */
+.button-primary {
+  background: var(--purple);
+  color: #fff;
+  box-shadow: 0 5px 12px rgba(102, 87, 232, 0.2);
+}
+
+/* 주요 버튼에 마우스를 올리면 배경을 조금 진하게 바꿉니다. */
+.button-primary:hover {
+  background: #5748d8;
+}
+
+/* 비활성화된 저장 버튼은 흐리게 표시하고 클릭 불가 커서를 사용합니다. */
+.button-primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* 취소 버튼은 보조 동작이므로 중립적인 배경을 사용합니다. */
+.button-quiet {
+  background: #f2f3f7;
+  color: #686d7e;
+}
+
+/* JavaScript가 이 클래스를 붙인 요소는 레이아웃에서 감춥니다. */
+.is-hidden {
+  display: none;
+}
+
+/* 폼 오류/상태 안내 문구의 색상과 줄 간격입니다. */
+.form-notice {
+  margin: -6px 0 12px;
+  color: #bc4551;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* 내용이 없을 때 안내 문구가 불필요한 빈 공간을 차지하지 않게 합니다. */
+.form-notice:empty {
+  display: none;
+}
+
+/* 카테고리별 지출 행을 세로로 일정 간격을 두고 배치합니다. */
+.category-list {
+  display: grid;
+  gap: 15px;
+}
+
+/* 목록이 비어 있을 때 표시되는 안내 문구 공통 스타일입니다. */
+.category-empty,
+.empty-state {
+  padding: 28px 12px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* 카테고리 이름/금액과 막대 사이의 세로 간격입니다. */
+.category-row {
+  display: grid;
+  gap: 7px;
+}
+
+/* 각 카테고리의 이름과 금액을 양쪽 끝에 배치합니다. */
+.category-label-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 11px;
+}
+
+/* 긴 카테고리 이름이 금액 영역을 밀지 않도록 필요한 곳에서 줄바꿈합니다. */
+.category-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #555a6d;
+  font-weight: 600;
+}
+
+/* 금액 텍스트는 줄어들거나 줄바꿈하지 않도록 고정합니다. */
+.category-amount {
+  flex-shrink: 0;
+  color: #303447;
+  font-weight: 700;
+}
+
+/* 그래프의 바탕 트랙이며 넘치는 막대 부분은 잘라냅니다. */
+.category-track {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f0f1f6;
+}
+
+/* 실제 비율 막대입니다. 색상은 JavaScript의 --bar-color 변수에서 받습니다. */
+.category-bar {
+  height: 100%;
+  min-width: 2px;
+  border-radius: inherit;
+  background: var(--bar-color);
+}
+
+/* 페이지 하단의 저장 위치 안내 문구입니다. */
+.page-footer {
+  padding: 23px 0 0;
+  color: #9a9eac;
+  text-align: center;
+  font-size: 10px;
+}
+
+/* 760px 이하에서는 우측 열이 좁아지지 않도록 본문을 한 열로 바꿉니다. */
+@media (max-width: 760px) {
+  .app-shell {
+    width: min(100% - 32px, 560px);
+    padding-top: 34px;
+  }
+
+  .content-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* 휴대전화 크기에서는 여백과 카드 크기를 더 줄여 375px 폭에서도 가로 넘침을 방지합니다. */
+@media (max-width: 480px) {
+  .app-shell {
+    width: calc(100% - 28px);
+    padding-top: 27px;
+  }
+
+  .page-header {
+    margin-bottom: 21px;
+  }
+
+  .header-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+  }
+
+  .page-description {
+    max-width: 260px;
+    line-height: 1.6;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+    margin-bottom: 14px;
+  }
+
+  .summary-card {
+    min-height: 116px;
+    padding: 15px;
+    border-radius: 14px;
+  }
+
+  .summary-card:first-child {
+    grid-column: 1 / -1;
+    min-height: 105px;
+  }
+
+  .summary-value {
+    margin-top: 10px;
+    font-size: 23px;
+  }
+
+  .summary-note {
+    font-size: 10px;
+  }
+
+  .content-grid,
+  .side-column {
+    gap: 14px;
+  }
+
+  .panel {
+    padding: 18px 15px;
+    border-radius: 15px;
+  }
+
+  .subscription-card {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 13px;
+  }
+
+  .subscription-info {
+    flex: 1 1 55%;
+  }
+
+  .subscription-price {
+    margin-left: auto;
+    padding-top: 1px;
+  }
+
+  .card-actions {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: -6px;
+  }
+
+  .field-row {
+    gap: 8px;
+  }
+}
+
+/* 사용자가 시스템에서 애니메이션 감소를 요청한 경우 전환 효과를 추가하지 않습니다. */
+@media (prefers-reduced-motion: no-preference) {
+  .button,
+  .icon-button {
+    transition: background-color 140ms ease, color 140ms ease;
+  }
+}
